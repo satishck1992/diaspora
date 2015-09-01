@@ -7,6 +7,9 @@ class SessionsController < Devise::SessionsController
   before_filter :reset_authentication_token, :only => [:destroy]
 
   def reset_authentication_token
-    current_user.reset_authentication_token!
+    begin
+	    current_user.reset_authentication_token!
+    rescue NoMethodError
+    end
   end
 end
